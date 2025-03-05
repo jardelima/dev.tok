@@ -18,7 +18,7 @@ export const useArticles = ({ enabled, type }: UseArticles) => {
   const [articles, setArticles] = useState<Article[]>([]);
 
   const url = type === "featured" ? "/articles" : "/articles/latest";
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: [`${type}Articles`, page],
     enabled,
     queryFn: async () => {
@@ -36,5 +36,5 @@ export const useArticles = ({ enabled, type }: UseArticles) => {
     ]);
   }, [data]);
 
-  return { articles, fetchMore: () => setPage((prev) => prev + 1) };
+  return { articles, fetchMore: () => setPage((prev) => prev + 1), refetch };
 };

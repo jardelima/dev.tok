@@ -1,14 +1,16 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useRef, useState } from "react";
 import { useArticles } from "../api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Article } from "./Article";
 import { Spinner } from "@phosphor-icons/react";
+import { Comments, CommentsHandler } from "./Comments";
 
 const tabs = ["featured", "latest"] as const;
 type Tab = (typeof tabs)[number];
 
 export const ForYou = () => {
   const [tab, setTab] = useState<Tab>("featured");
+  const commentsHandler = useRef<CommentsHandler>(null);
 
   const featured = useArticles({
     type: "featured",
@@ -38,7 +40,12 @@ export const ForYou = () => {
         visible={tab === "featured"}
       >
         {featured.articles.map((article) => (
-          <Article article={article} />
+          <Article
+            article={article}
+            onCommentsClick={() => {
+              commentsHandler.current?.open(article.id);
+            }}
+          />
         ))}
       </ScrollView>
       <ScrollView
@@ -47,9 +54,15 @@ export const ForYou = () => {
         visible={tab === "latest"}
       >
         {latest.articles.map((article) => (
-          <Article article={article} />
+          <Article
+            article={article}
+            onCommentsClick={() => {
+              commentsHandler.current?.open(article.id);
+            }}
+          />
         ))}
       </ScrollView>
+      <Comments ref={commentsHandler} />
     </div>
   );
 };

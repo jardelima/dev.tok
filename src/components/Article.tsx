@@ -2,9 +2,10 @@ import { ChatCircleDots, Heart } from "@phosphor-icons/react";
 
 type ArticleProps = {
   article: Article;
+  onCommentsClick?: () => void;
 };
 
-export const Article = ({ article }: ArticleProps) => {
+export const Article = ({ article, onCommentsClick }: ArticleProps) => {
   return (
     <div className="h-dyn-screen snap-center flex flex-col justify-end items-center relative max-w-[500px] mx-auto">
       <div className="h-full w-full absolute pointer-events-none">
@@ -75,10 +76,12 @@ export const Article = ({ article }: ArticleProps) => {
               </p>
             </div>
             <div className="flex flex-col text-center gap-1 w-10">
-              <ChatCircleDots
-                className="text-gray-100 w-10 h-10"
-                weight="fill"
-              />
+              <button onClick={onCommentsClick}>
+                <ChatCircleDots
+                  className="text-gray-100 w-10 h-10"
+                  weight="fill"
+                />
+              </button>
               <p className="text-gray-100 text-sm">{article.comments_count}</p>
             </div>
           </div>
