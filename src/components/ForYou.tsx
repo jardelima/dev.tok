@@ -1,49 +1,86 @@
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { api } from "../api";
+import { PropsWithChildren, useState } from "react";
+import { useArticles } from "../api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Article } from "./Article";
 
-export const ForYou = () => {
-  const [page, setPage] = useState(1);
-  const { data: featuredArticles } = useQuery({
-    queryKey: ["articles", page],
-    queryFn: async () => {
-      const params = new URLSearchParams({
-        per_page: "20",
-        page: page.toString(),
-      });
-      return (await api.get("/articles?" + params)).data as Article[];
-    },
-  });
-  const [articles, setArticles] = useState<Article[]>([]);
+const tabs = ["featured", "latest"] as const;
+type Tab = (typeof tabs)[number];
 
-  useEffect(() => {
-    setArticles((prev) => [
-      ...prev,
-      ...(featuredArticles?.filter((x) => x.cover_image) ?? []),
-    ]);
-  }, [featuredArticles]);
+export const ForYou = () => {
+  const [tab, setTab] = useState<Tab>("featured");
+
+  const featured = useArticles({
+    type: "featured",
+    enabled: tab === "featured",
+  });
+  const latest = useArticles({
+    type: "latest",
+    enabled: tab === "latest",
+  });
 
   return (
-    <InfiniteScroll
-      dataLength={articles.length}
-      next={() => setPage(page + 1)}
-      hasMore={true}
-      loader={<h4>Loading...</h4>}
-      endMessage={
-        <p style={{ textAlign: "center" }}>
-          <b>Yay! You have seen it all</b>
-        </p>
-      }
-      className="snap-y snap-mandatory snap-always !overflow-y-scroll !h-dvh"
-      style={{
-        height: "100vh",
-      }}
-    >
-      {articles.map((article) => (
-        <Article article={article} />
-      ))}
-    </InfiniteScroll>
+    <div className="flex flex-col items-center">
+      <div role="tablist" className="tabs tabs-border fixed top-4 z-50">
+        {tabs.map((t) => (
+          <a
+            role="tab"
+            className={`tab ${tab === t ? "tab-active" : ""}`}
+            onClick={() => setTab(t)}
+          >
+            {t === "featured" ? "Featured" : "Latest"}
+          </a>
+        ))}
+      </div>
+      <ScrollView
+        items={featured.articles}
+        fetchMore={featured.fetchMore}
+        visible={tab === "featured"}
+      >
+        {featured.articles.map((article) => (
+          <Article article={article} />
+        ))}
+      </ScrollView>
+      <ScrollView
+        items={latest.articles}
+        fetchMore={latest.fetchMore}
+        visible={tab === "latest"}
+      >
+        {latest.articles.map((article) => (
+          <Article article={article} />
+        ))}
+      </ScrollView>
+    </div>
   );
 };
+
+type ScrollViewProps = {
+  items: Article[];
+  visible: boolean;
+  fetchMore: () => void;
+};
+
+const ScrollView = ({
+  items,
+  fetchMore,
+  visible,
+  children,
+}: PropsWithChildren<ScrollViewProps>) => (
+  <InfiniteScroll
+    dataLength={items.length}
+    key="featuredScroll"
+    next={fetchMore}
+    hasMore={true}
+    loader={<h4>Loading...</h4>}
+    endMessage={
+      <p style={{ textAlign: "center" }}>
+        <b>Yay! You have seen it all</b>
+      </p>
+    }
+    className={`${
+      visible ? "" : "hidden"
+    } snap-y snap-mandatory snap-always !overflow-y-scroll !h-dvh`}
+    height="100vh"
+  >
+    {children}
+  </InfiniteScroll>
+);
