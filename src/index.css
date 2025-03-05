@@ -16,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body, #root {
+body, #root, .h-dyn-screen {
   min-height: 100vh;
   min-height: 100dvh;
 }
