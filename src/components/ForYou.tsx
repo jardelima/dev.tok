@@ -2,6 +2,7 @@ import { PropsWithChildren, useState } from "react";
 import { useArticles } from "../api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Article } from "./Article";
+import { Spinner } from "@phosphor-icons/react";
 
 const tabs = ["featured", "latest"] as const;
 type Tab = (typeof tabs)[number];
@@ -70,9 +71,16 @@ const ScrollView = ({
     key="featuredScroll"
     next={fetchMore}
     hasMore={true}
-    loader={<h4>Loading...</h4>}
+    loader={
+      !items.length ? (
+        <Spinner
+          className="text-gray-100 w-20 h-20 animate-spin fixed top-1/2 left-1/2 -translate-1/2 bg-black/25 p-2 rounded-full"
+          weight="bold"
+        />
+      ) : null
+    }
     endMessage={
-      <p style={{ textAlign: "center" }}>
+      <p className="text-center py-3">
         <b>Yay! You have seen it all</b>
       </p>
     }
