@@ -21,6 +21,10 @@ body, #root, .h-dyn-screen {
   min-height: 100dvh;
 }
 
+body {
+  overflow: hidden;
+}
+
 .for-you {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */

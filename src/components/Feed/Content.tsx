@@ -53,7 +53,7 @@ export const Content = ({
       }
       className={`${
         selectedTab === contentTab ? "" : "hidden"
-      } for-you snap-y snap-mandatory snap-always !overflow-y-scroll !h-dvh`}
+      } for-you snap-y snap-mandatory snap-always !overflow-y-scroll !h-dvh w-screen`}
       height="100vh"
     >
       {articles.map((article) => (
