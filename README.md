@@ -44,4 +44,4 @@ We accept contributions of all kinds, including bug fixes, feature requests, and
     pnpm dev
     ```
 
-4. Open your browser and navigate to `http://localhost:3000`.
+4. Open your browser and navigate to `http://localhost:5173`.
