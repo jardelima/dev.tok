@@ -1,54 +1,17 @@
-# React + TypeScript + Vite
+# DEV.TOK
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Dev.to is already perfect on its own, but imagine if it was more... "engaging"? That's what Dev.tok is all about.
 
-Currently, two official plugins are available:
+<img alt="Dev.tok logo" height="200" align="right" src="./public/logo-full.svg">
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+On it, you can see articles from your phone just like a social media feed. Easy to use, easy to read, and easy to share.
 
-## Expanding the ESLint configuration
+You can see articles from 3 different tabs:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Popular**, which as the name suggests, shows the most popular articles on Dev.to currently.
+- **Latest**, which shows the latest articles published.
+- **For you**, which shows articles based on your interests.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 👾 Contributing
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+This project is made by devs, for devs, so if you want to contribute in any way, feel free to do so!
