@@ -55,10 +55,7 @@ export const Comments = forwardRef<CommentsHandler>((_, ref) => {
       >
         <div className="h-14 flex flex-col justify-center p-4 gap-2 text-black">
           <button onClick={() => setIsOpen(false)} className="absolute right-2">
-            <X
-              className="w-8 h-8 hover:bg-gray-200 rounded-full aspect-square"
-              preserveAspectRatio="false"
-            />
+            <X className="w-8 h-8 hover:bg-gray-200 rounded-full aspect-square" />
           </button>
           <h2 className="text-black font-semibold text-left">
             {t("comments.title")}

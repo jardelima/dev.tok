@@ -15,6 +15,7 @@ export const Tabs = ({ onSelectTab, selectedTab }: TabsProps) => {
     <div role="tablist" className="tabs tabs-border fixed top-4 z-40">
       {tabs.map((tab) => (
         <a
+          key={tab}
           role="tab"
           className={`tab text-white w-28 ${
             selectedTab === tab ? "tab-active" : ""

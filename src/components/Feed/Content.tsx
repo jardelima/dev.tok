@@ -58,6 +58,7 @@ export const Content = ({
     >
       {articles.map((article) => (
         <Article
+          key={article.id}
           article={article}
           onCommentsClick={() => commentsHandler.current?.open(article.id)}
         />
