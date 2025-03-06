@@ -23,7 +23,7 @@ export const ForYou = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div role="tablist" className="tabs tabs-border fixed top-4 z-50">
+      <div role="tablist" className="tabs tabs-border fixed top-4 z-40">
         {tabs.map((t) => (
           <a
             role="tab"
@@ -99,7 +99,7 @@ const ScrollView = ({
     }
     className={`${
       visible ? "" : "hidden"
-    } snap-y snap-mandatory snap-always !overflow-y-scroll !h-dvh`}
+    } for-you snap-y snap-mandatory snap-always !overflow-y-scroll !h-dvh`}
     height="100vh"
   >
     {children}
