@@ -5,12 +5,14 @@ import { api } from "../api";
 import sanitizeHtml from "sanitize-html";
 import { Spinner, X } from "@phosphor-icons/react";
 import { formatDistance } from "date-fns/formatDistance";
+import { useTranslation } from "react-i18next";
 
 export type CommentsHandler = {
   open: (articleId: number) => void;
 };
 
 export const Comments = forwardRef<CommentsHandler>((_, ref) => {
+  const { t } = useTranslation();
   const [articleId, setArticleId] = useState<number | null>(null);
   const { data: comments, isPending } = useQuery({
     queryKey: ["comments", articleId],
@@ -58,7 +60,9 @@ export const Comments = forwardRef<CommentsHandler>((_, ref) => {
               preserveAspectRatio="false"
             />
           </button>
-          <h2 className="text-black font-semibold text-left">Comments</h2>
+          <h2 className="text-black font-semibold text-left">
+            {t("comments.title")}
+          </h2>
         </div>
         <div className="flex flex-col gap-4 p-4 text-black h-[70vh] overflow-auto overscroll-none">
           {isPending ? (

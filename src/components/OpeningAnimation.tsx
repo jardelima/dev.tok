@@ -1,10 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 type OpeningAnimationProps = {
   onContinue: () => void;
 };
 
 export const OpeningAnimation = ({ onContinue }: OpeningAnimationProps) => {
+  const { t } = useTranslation();
+
   return (
     <AnimatePresence>
       <div className="fixed h-dvh w-full flex flex-col justify-center items-center z-50">
@@ -30,7 +33,7 @@ export const OpeningAnimation = ({ onContinue }: OpeningAnimationProps) => {
             }}
             className="font-['bayon'] text-4xl"
           >
-            Welcome to
+            {t("onboarding.welcomeTo")}
           </motion.p>
           <motion.img
             style={{
@@ -75,7 +78,7 @@ export const OpeningAnimation = ({ onContinue }: OpeningAnimationProps) => {
             className="btn mt-5 btn-outline"
             onClick={onContinue}
           >
-            Thanks!
+            {t("onboarding.thanks")}
           </motion.button>
         </div>
       </div>

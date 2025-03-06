@@ -2,14 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 type PreferencesSelectionProps = {
   onFinish: () => void;
 };
 
+const MINIMUM_TAGS = 5;
+
 export const PreferencesSelection = ({
   onFinish,
 }: PreferencesSelectionProps) => {
+  const { t } = useTranslation();
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
   const { data: tags } = useQuery({
@@ -60,7 +64,9 @@ export const PreferencesSelection = ({
       className="z-50 text-center flex flex-col overflow-auto items-center py-5 gap-5"
     >
       <div>
-        <h2 className="font-bold text-xl">What are your interests?</h2>
+        <h2 className="font-bold text-xl">
+          {t("onboarding.whatAreYourInterests")}
+        </h2>
       </div>
       <div className="flex flex-wrap gap-2 items-center justify-center max-w-[500px] px-4">
         {tags?.map((tag) => (
@@ -86,12 +92,18 @@ export const PreferencesSelection = ({
         <button
           onClick={onSubmit}
           className="btn mt-5 btn-outline"
-          disabled={selectedTags.length < 5}
+          disabled={selectedTags.length < MINIMUM_TAGS}
         >
-          Continue
+          {t("onboarding.continue")}
         </button>
-        <p className={`text-sm ${selectedTags.length < 5 ? "" : "invisible"}`}>
-          Select at least 5 to continue
+        <p
+          className={`text-sm ${
+            selectedTags.length < MINIMUM_TAGS ? "" : "invisible"
+          }`}
+        >
+          {t("onboarding.selectAtLeast", {
+            num: MINIMUM_TAGS,
+          })}
         </p>
       </div>
     </motion.div>

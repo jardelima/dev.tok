@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 type OnboardFinishedProps = {
   onFinish: () => void;
 };
 
 export const OnboardFinished = ({ onFinish }: OnboardFinishedProps) => {
+  const { t } = useTranslation();
+
   return (
     <motion.div
       style={{
@@ -24,14 +27,11 @@ export const OnboardFinished = ({ onFinish }: OnboardFinishedProps) => {
       }}
       className="max-w-[500px] px-5 text-balance fixed top-0 z-50 text-center flex flex-col h-dvh items-center justify-center gap-5"
     >
-      <h2 className="font-bold text-xl">Great Choice! 😉</h2>
-      <p>
-        Thanks for sharing your preferences! I'll now tailor recommendations
-        just for you, bringing exciting articles that match your interests.
-      </p>
-      <p>Feel free to explore and enjoy the content we've curated for you!</p>
+      <h2 className="font-bold text-xl">{t("onboarding.finishTitle")}</h2>
+      <p>{t("onboarding.finishDescription")}</p>
+      <p>{t("onboarding.finishExplore")}</p>
       <button className="btn btn-outline mt-5" onClick={onFinish}>
-        Let's go!
+        {t("onboarding.letsGo")}
       </button>
     </motion.div>
   );

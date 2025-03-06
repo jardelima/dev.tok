@@ -1,4 +1,5 @@
 import { ChatCircleDots, Heart } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 type ArticleProps = {
   article: Article;
@@ -6,6 +7,8 @@ type ArticleProps = {
 };
 
 export const Article = ({ article, onCommentsClick }: ArticleProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="h-dyn-screen snap-center flex flex-col justify-end items-center relative max-w-[500px] mx-auto">
       <div className="h-full w-full absolute pointer-events-none">
@@ -41,11 +44,15 @@ export const Article = ({ article, onCommentsClick }: ArticleProps) => {
             <p className="mb-4 hyphens-auto">{article.description}</p>
             <div className="flex items-center justify-between">
               <a href={article.url} target="_blank" rel="noopener noreferrer">
-                <button className="btn btn-outline">Read More</button>
+                <button className="btn btn-outline">
+                  {t("forYou.readMore")}
+                </button>
               </a>
               <p className="opacity-50">
-                {article.reading_time_minutes} min read &middot;{" "}
-                {new Date(article.published_at).toLocaleDateString()}
+                {t("forYou.minRead", {
+                  min: article.reading_time_minutes,
+                })}{" "}
+                &middot; {new Date(article.published_at).toLocaleDateString()}
               </p>
             </div>
           </div>

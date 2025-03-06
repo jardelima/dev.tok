@@ -10,7 +10,7 @@ export const api = axios.create({
 
 type UseArticles = {
   enabled: boolean;
-  type: "featured" | "latest";
+  type: "popular" | "latest";
   tags?: string;
 };
 
@@ -18,7 +18,7 @@ export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<Article[]>([]);
 
-  const url = type === "featured" ? "/articles" : "/articles/latest";
+  const url = type === "popular" ? "/articles" : "/articles/latest";
   const { data, refetch } = useQuery({
     queryKey: [`${type}Articles`, page, tags],
     enabled,

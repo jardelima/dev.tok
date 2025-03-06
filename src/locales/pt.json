@@ -1,0 +1,26 @@
+{
+  "tabs": {
+    "popular": "Popular",
+    "for_you": "Para Você",
+    "latest": "Recentes"
+  },
+  "onboarding": {
+    "welcomeTo": "Bem-vindo ao",
+    "thanks": "Obrigado!",
+    "whatAreYourInterests": "Quais são os seus interesses?",
+    "continue": "Continuar",
+    "selectAtLeast": "Selecione pelo menos {{num}} para continuar",
+    "finishTitle": "Boa escolha! 😉",
+    "finishDescription": "Obrigado por compartilhar suas preferências! Agora vou recomendar conteúdos feitos sob medida para você, trazendo artigos empolgantes que combinam com seus interesses.",
+    "finishExplore": "Sinta-se à vontade para explorar e aproveitar o conteúdo que preparamos especialmente para você!",
+    "letsGo": "Vamos lá!"
+  },
+  "forYou": {
+    "articlesFinished": "Oba! Você já viu tudo.",
+    "readMore": "Ler Mais",
+    "minRead": "{{min}} min"
+  },
+  "comments": {
+    "title": "Comentários"
+  }
+}
