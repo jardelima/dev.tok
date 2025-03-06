@@ -21,6 +21,7 @@
     "minRead": "{{min}} min read"
   },
   "comments": {
-    "title": "Comments"
+    "title": "Comments",
+    "empty": "No comments yet"
   }
 }

@@ -67,8 +67,8 @@ export const Comments = forwardRef<CommentsHandler>((_, ref) => {
         <div className="flex flex-col gap-4 p-4 text-black h-[70vh] overflow-auto overscroll-none">
           {isPending ? (
             <Spinner className="w-10 h-10 animate-spin mx-auto" weight="bold" />
-          ) : (
-            comments?.map((comment) => (
+          ) : comments?.length ? (
+            comments.map((comment) => (
               <div key={comment.id_code} className="flex gap-4">
                 <img
                   src={comment.user.profile_image}
@@ -96,6 +96,8 @@ export const Comments = forwardRef<CommentsHandler>((_, ref) => {
                 </div>
               </div>
             ))
+          ) : (
+            <p className="text-center">{t("comments.empty")}</p>
           )}
         </div>
       </motion.div>
