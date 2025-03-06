@@ -1,7 +1,7 @@
-import { ForYou } from "./components/ForYou";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Onboard } from "./components/Onboard";
+import { Feed } from "./components/Feed";
 
 export const App = () => {
   const [isOnboarded, setIsOnboarded] = useState(
@@ -21,7 +21,7 @@ export const App = () => {
           overflow: isOnboarded ? "initial" : "hidden",
         }}
       >
-        <ForYou />
+        <Feed />
       </motion.div>
     </>
   );

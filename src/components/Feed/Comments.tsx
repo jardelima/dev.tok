@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../api";
+import { api } from "../../shared/api";
 import sanitizeHtml from "sanitize-html";
 import { Spinner, X } from "@phosphor-icons/react";
 import { formatDistance } from "date-fns/formatDistance";
