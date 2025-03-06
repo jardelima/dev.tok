@@ -8,7 +8,7 @@
 
 Dev.tok is an open-source web application that leverages the [dev.to API](https://developers.forem.com/api) to display content in a feed-like manner, similar to TikTok and Instagram Reels. The goal is to enhance user engagement by providing a seamless and interactive browsing experience.
 
-Visit the live website at [https://dev-tok.vercel.app/](https://dev-tok.vercel.app/).
+Visit the live website at [devtok.xyz](https://devtok.xyz/).
 
 ## Features
 
