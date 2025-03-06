@@ -20,9 +20,11 @@ export const PreferencesSelection = ({
     queryKey: ["tags"],
     queryFn: async () => {
       const params = new URLSearchParams({
-        per_page: "40",
+        per_page: "50",
       });
-      return (await api.get("/tags?" + params)).data as Tag[];
+      return ((await api.get("/tags?" + params)).data as Tag[]).filter(
+        (tag) => tag.bg_color_hex
+      );
     },
   });
 

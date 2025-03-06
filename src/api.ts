@@ -22,11 +22,17 @@ export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
   const { data, refetch } = useQuery({
     queryKey: [`${type}Articles`, page, tags],
     enabled,
+    staleTime: 1000 * 60 * 5,
     queryFn: async () => {
       const params = new URLSearchParams({
         page: page.toString(),
       });
-      if (tags) params.set("tags", tags);
+      if (tags) {
+        const tagArray = tags.split(",");
+        const randomTag = tagArray[Math.floor(Math.random() * tagArray.length)];
+        params.set("tag", randomTag);
+        params.set("tags", tags);
+      }
       return (await api.get(`${url}?${params}`)).data as Article[];
     },
   });
