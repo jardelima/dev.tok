@@ -1,24 +1,24 @@
 import { ForYou } from "./components/ForYou";
 import { motion } from "framer-motion";
-import { OpeningAnimation } from "./components/OpeningAnimation";
+import { useState } from "react";
+import { Onboard } from "./components/Onboard";
 
 export const App = () => {
-  const alreadyHadAnimation =
-    sessionStorage.getItem("openedAnimation") === "true";
+  const [isOnboarded, setIsOnboarded] = useState(
+    localStorage.getItem("preferences") !== null
+  );
 
   return (
     <>
-      <OpeningAnimation />
+      {!isOnboarded && <Onboard onFinish={() => setIsOnboarded(true)} />}
       <motion.div
         style={{
-          filter: alreadyHadAnimation ? "blur(0px)" : "blur(5px)",
+          filter: isOnboarded ? "blur(0px)" : "blur(5px)",
+          overflow: isOnboarded ? "initial" : "hidden",
         }}
         animate={{
-          filter: "blur(0px)",
-        }}
-        transition={{
-          duration: 2,
-          delay: 6,
+          filter: isOnboarded ? "blur(0px)" : "blur(5px)",
+          overflow: isOnboarded ? "initial" : "hidden",
         }}
       >
         <ForYou />
