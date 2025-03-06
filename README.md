@@ -1,17 +1,47 @@
-# DEV.TOK
+# Dev.tok
 
-> Dev.to is already perfect on its own, but imagine if it was more... "engaging"? That's what Dev.tok is all about.
+<img align="right" src="public/logo-full.svg" width="200" alt="Dev.tok logo" style="margin-left: 30px" />
 
-<img alt="Dev.tok logo" height="200" align="right" src="./public/logo-full.svg">
 
-On it, you can see articles from your phone just like a social media feed. Easy to use, easy to read, and easy to share.
+[![Contributors](https://img.shields.io/github/contributors/Nick-Gabe/dev.tok)](https://github.com/Nick-Gabe/dev.tok/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/Nick-Gabe/dev.tok)](https://github.com/Nick-Gabe/dev.tok/issues)
 
-You can see articles from 3 different tabs:
+Dev.tok is an open-source web application that leverages the [dev.to API](https://developers.forem.com/api) to display content in a feed-like manner, similar to TikTok and Instagram Reels. The goal is to enhance user engagement by providing a seamless and interactive browsing experience.
 
-- **Popular**, which as the name suggests, shows the most popular articles on Dev.to currently.
-- **Latest**, which shows the latest articles published.
-- **For you**, which shows articles based on your interests.
+Visit the live website at [https://dev-tok.vercel.app/](https://dev-tok.vercel.app/).
 
-## 👾 Contributing
+## Features
 
-This project is made by devs, for devs, so if you want to contribute in any way, feel free to do so!
+- **Feed-like Interface**: Browse articles in a visually engaging, swipeable format.
+- **Comments**: View and interact with comments on articles.
+- **Localization**: Supports multiple languages using `i18next`.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+
+## Contributing
+
+We accept contributions of all kinds, including bug fixes, feature requests, and documentation improvements. If you're interested in contributing, here's a quick guide to get you started:
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/)
+- [pnpm](https://pnpm.io/)
+
+### Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Nick-Gabe/dev.tok.git
+    cd dev.tok
+    ```
+
+2. Install dependencies:
+    ```sh
+    pnpm install
+    ```
+
+3. Start the development server:
+    ```sh
+    pnpm dev
+    ```
+
+4. Open your browser and navigate to `http://localhost:3000`.
