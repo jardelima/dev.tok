@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Tab } from "../components/Feed/Tabs";
 
 const API_URL = "https://dev.to/api";
@@ -21,11 +21,13 @@ export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
   );
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<Article[]>([]);
+  const articleIds = useMemo(() => articles.map((x) => x.id), [articles]);
 
   const url = type === "latest" ? "/articles/latest" : "/articles";
   const { data, refetch } = useQuery({
     queryKey: [`${type}Articles`, page, tags],
     enabled,
+    refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
     queryFn: async () => {
       const params = new URLSearchParams({
@@ -52,8 +54,11 @@ export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
   useEffect(() => {
     setArticles((prev) => [
       ...prev,
-      ...(data?.filter((x) => x.cover_image) ?? []),
+      ...(data?.filter(
+        (article) => article.cover_image && !articleIds.includes(article.id)
+      ) ?? []),
     ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return { articles, fetchMore: () => setPage((prev) => prev + 1), refetch };
