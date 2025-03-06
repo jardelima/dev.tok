@@ -11,20 +11,22 @@ export const api = axios.create({
 type UseArticles = {
   enabled: boolean;
   type: "featured" | "latest";
+  tags?: string;
 };
 
-export const useArticles = ({ enabled, type }: UseArticles) => {
+export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<Article[]>([]);
 
   const url = type === "featured" ? "/articles" : "/articles/latest";
   const { data, refetch } = useQuery({
-    queryKey: [`${type}Articles`, page],
+    queryKey: [`${type}Articles`, page, tags],
     enabled,
     queryFn: async () => {
       const params = new URLSearchParams({
         page: page.toString(),
       });
+      if (tags) params.set("tags", tags);
       return (await api.get(`${url}?${params}`)).data as Article[];
     },
   });

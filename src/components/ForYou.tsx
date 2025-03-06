@@ -5,11 +5,11 @@ import { Article } from "./Article";
 import { Spinner } from "@phosphor-icons/react";
 import { Comments, CommentsHandler } from "./Comments";
 
-const tabs = ["featured", "latest"] as const;
-type Tab = (typeof tabs)[number];
+const tabs = ["featured", "for_you", "latest"] as const;
+export type Tab = (typeof tabs)[number];
 
 export const ForYou = () => {
-  const [tab, setTab] = useState<Tab>("featured");
+  const [tab, setTab] = useState<Tab>("for_you");
   const commentsHandler = useRef<CommentsHandler>(null);
 
   const featured = useArticles({
@@ -20,6 +20,11 @@ export const ForYou = () => {
     type: "latest",
     enabled: tab === "latest",
   });
+  const forYou = useArticles({
+    type: "featured",
+    enabled: tab === "for_you",
+    tags: localStorage.getItem("preferences") ?? "",
+  });
 
   return (
     <div className="flex flex-col items-center">
@@ -27,10 +32,10 @@ export const ForYou = () => {
         {tabs.map((t) => (
           <a
             role="tab"
-            className={`tab ${tab === t ? "tab-active" : ""}`}
+            className={`tab w-1/3 ${tab === t ? "tab-active" : ""}`}
             onClick={() => setTab(t)}
           >
-            {t === "featured" ? "Featured" : "Latest"}
+            {t}
           </a>
         ))}
       </div>
@@ -40,6 +45,20 @@ export const ForYou = () => {
         visible={tab === "featured"}
       >
         {featured.articles.map((article) => (
+          <Article
+            article={article}
+            onCommentsClick={() => {
+              commentsHandler.current?.open(article.id);
+            }}
+          />
+        ))}
+      </ScrollView>
+      <ScrollView
+        items={forYou.articles}
+        fetchMore={forYou.fetchMore}
+        visible={tab === "for_you"}
+      >
+        {forYou.articles.map((article) => (
           <Article
             article={article}
             onCommentsClick={() => {
