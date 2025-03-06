@@ -73,7 +73,7 @@ export const Comments = forwardRef<CommentsHandler>((_, ref) => {
                 <img
                   src={comment.user.profile_image}
                   alt={comment.user.name}
-                  className="w-10 h-10 rounded-full translate-y-1"
+                  className="min-w-10 w-10 h-10 bg-gray-300 rounded-full translate-y-1"
                 />
                 <div>
                   <div className="flex items-center">
