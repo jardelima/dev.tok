@@ -24,7 +24,7 @@ export const Content = ({
   const { t } = useTranslation();
 
   const { articles, fetchMore } = useArticles({
-    type: contentTab === "latest" ? "latest" : "popular",
+    type: contentTab,
     enabled: selectedTab === contentTab,
     tags:
       selectedTab === "for_you"

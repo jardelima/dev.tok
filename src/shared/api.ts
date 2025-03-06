@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Tab } from "../components/Feed/Tabs";
 
 const API_URL = "https://dev.to/api";
 
@@ -10,15 +11,18 @@ export const api = axios.create({
 
 type UseArticles = {
   enabled: boolean;
-  type: "popular" | "latest";
+  type: Tab;
   tags?: string;
 };
 
 export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
+  const [tagPages, setTagPages] = useState(
+    Object.fromEntries(tags.split(",").map((tag) => [tag, 1]))
+  );
   const [page, setPage] = useState(1);
   const [articles, setArticles] = useState<Article[]>([]);
 
-  const url = type === "popular" ? "/articles" : "/articles/latest";
+  const url = type === "latest" ? "/articles/latest" : "/articles";
   const { data, refetch } = useQuery({
     queryKey: [`${type}Articles`, page, tags],
     enabled,
@@ -30,8 +34,16 @@ export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
       if (tags) {
         const tagArray = tags.split(",");
         const randomTag = tagArray[Math.floor(Math.random() * tagArray.length)];
+
+        params.set("page", tagPages[randomTag].toString());
         params.set("tag", randomTag);
+        // At the moment, "?tags" don't work properly in the API. So the temporary solution is
+        // to randomly select a tag from the user preferences with a low per_page and increment the
+        // page number for that tag specifically.
         params.set("tags", tags);
+        if (type === "for_you") params.set("per_page", "5");
+
+        setTagPages((prev) => ({ ...prev, [randomTag]: prev[randomTag] + 1 }));
       }
       return (await api.get(`${url}?${params}`)).data as Article[];
     },
