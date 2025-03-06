@@ -18,13 +18,13 @@ export const Article = ({ article, onCommentsClick }: ArticleProps) => {
           }}
         />
         <img
-          className="h-full w-full absolute -top-20 object-contain -z-10"
+          className="h-full w-full max-w-screen absolute -top-20 object-contain -z-10"
           src={article.cover_image}
           alt={article.title}
         />
       </div>
-      <div className="from-black/50 to-transparent bg-gradient-to-t p-3 pb-6">
-        <div className="w-[calc(100%-0.75rem)] grid grid-cols-[90%_10%] gap-3 box-">
+      <div className="from-black/50 to-transparent bg-gradient-to-t p-3 pb-6 max-w-screen">
+        <div className="w-[calc(100%-0.75rem)] max-w-screen grid grid-cols-[90%_10%] gap-3 box-">
           <div className="bg-black/25 p-3 rounded-lg">
             <h2 className="font-bold text-2xl mb-2">{article.title}</h2>
             <div className="flex flex-wrap mb-2">
@@ -38,7 +38,7 @@ export const Article = ({ article, onCommentsClick }: ArticleProps) => {
               ))}
             </div>
             <hr className="mb-4" />
-            <p className="mb-4">{article.description}</p>
+            <p className="mb-4 hyphens-auto">{article.description}</p>
             <div className="flex items-center justify-between">
               <a href={article.url} target="_blank" rel="noopener noreferrer">
                 <button className="btn btn-outline">Read More</button>
