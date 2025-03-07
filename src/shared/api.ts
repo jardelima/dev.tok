@@ -55,7 +55,7 @@ export const useArticles = ({ enabled, type, tags = "" }: UseArticles) => {
     setArticles((prev) => [
       ...prev,
       ...(data?.filter(
-        (article) => article.cover_image && !articleIds.includes(article.id)
+        (article) => !articleIds.includes(article.id)
       ) ?? []),
     ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
