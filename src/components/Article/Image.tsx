@@ -6,7 +6,7 @@ export const Image = ({ article }: ImageProps) => {
   if (!article.cover_image) {
     return (
       <div className="h-full w-full absolute pointer-events-none">
-        <div className="h-full w-full absolute bg-black/20 blur-md brightness-50 -z-20"/>
+        <div className="h-full w-full absolute from-slate-700 to-transparent bg-gradient-to-t blur-md -z-20"/>
       </div>
     );
   }
